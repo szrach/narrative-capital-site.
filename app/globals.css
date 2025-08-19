@@ -6,26 +6,62 @@
 html, body{
   min-height:100%;
   background:#FFFFFF;
-  color:#4B5563;           /* softer paragraph color */
+  color:#4B5563;                 /* softer paragraph color */
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
+
+/* Type scale */
 .h1{ @apply text-4xl md:text-6xl font-semibold leading-tight text-[#0B1220]; }
 .h2{ @apply text-2xl md:text-3xl font-semibold text-[#0B1220]; }
 .lead{ @apply text-lg md:text-xl; }
+
+/* Buttons */
 .btn{ @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition; }
-.btn-gold{ @apply btn bg-[#D4AF37] text-black hover:opacity-90; }
-.btn-ghost{ @apply btn border border-[#E5E7EB] text-[#0B1220] hover:bg-black/[0.03]; }
+.btn-gold{ @apply btn bg-[#D4AF37] text-black; }
+.btn-gold:hover{ transform:translateY(-2px); }
+.btn-ghost{ @apply btn border border-[#E5E7EB] text-[#0B1220]; }
+.btn-ghost:hover{ background:rgba(0,0,0,.03); }
+
+/* Classic light card (not animated border) */
 .card{ @apply rounded-2xl bg-white border border-[#E5E7EB] shadow-[0_10px_30px_rgba(0,0,0,0.06)]; }
 
-/* ——— Motion (no lib required) ——— */
-@keyframes fadeUp{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)} }
-.reveal{ animation:fadeUp .6s ease both; }
-.reveal-delay-1{ animation-delay:.08s }
-.reveal-delay-2{ animation-delay:.16s }
-.reveal-delay-3{ animation-delay:.24s }
+/* ——— Motion / Reveal ——— */
+@keyframes fadeUp{ from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:translateY(0)} }
+.reveal-out{ opacity:0; transform:translateY(14px); }
+.reveal-in{ opacity:1; transform:translateY(0); animation:fadeUp .6s ease both; }
 
-/* ——— Utilities ——— */
+/* ——— Fancy card (gradient border + hover lift) ——— */
+.card-neo{
+  position: relative;
+  border-radius: 16px;
+  background: white;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card-neo::before{
+  content:"";
+  position:absolute; inset:-1px;
+  border-radius:17px;
+  background: conic-gradient(from 160deg,
+    rgba(212,175,55,.45),
+    rgba(255,255,255,0) 30%,
+    rgba(212,175,55,.35) 60%,
+    rgba(255,255,255,0) 90%);
+  z-index:-1;
+  filter: blur(6px);
+  opacity:.35;
+}
+.card-neo:hover{ transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.08) }
+
+/* ——— Marquee ——— */
+.marquee-wrap{ overflow:hidden; border-top:1px solid #E5E7EB; border-bottom:1px solid #E5E7EB; background:#FAFBFF; }
+.marquee-track{ display:flex; gap:14px; padding:12px 0; width:max-content; animation:marquee 22s linear infinite; }
+.marquee-chip{ padding:.4rem .75rem; border:1px solid #E5E7EB; border-radius:999px; background:white; color:#0B1220; font-size:.875rem; white-space:nowrap; }
+@keyframes marquee{ from{ transform:translateX(0)} to{ transform:translateX(-50%)} }
+
+/* ——— Subtle hero vignette ——— */
 .gold-vignette{
-  background: radial-gradient(closest-side, #F2D98A 0%, rgba(212,175,55,.12) 35%, transparent 65%);
+  background: radial-gradient(closest-side, #F7E8A9 0%, rgba(212,175,55,.14) 35%, transparent 65%);
 }
