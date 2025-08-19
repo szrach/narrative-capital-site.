@@ -1,12 +1,11 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-zinc-800 mt-20">
-      <div className="max-w-5xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-white/70">
-        <p>© {new Date().getFullYear()} Narrative Capital. All rights reserved.</p>
-        <div className="flex gap-4">
-          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white">Twitter</a>
-          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white">LinkedIn</a>
-        </div>
+    <footer className="border-t border-border bg-white">
+      <div className="container py-10 text-sm text-body/80 flex flex-col gap-3">
+        <p>
+          For information purposes only. Nothing on this site is an offer to sell securities or investment advice.
+        </p>
+        <p className="text-body/60">© {new Date().getFullYear()} Narrative Capital. All rights reserved.</p>
       </div>
     </footer>
   );
