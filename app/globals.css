@@ -2,19 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* base */
-html, body {
-  min-height: 100%;
-  background: theme(colors.background);
-  color: theme(colors.body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ——— Base ——— */
+html, body{
+  min-height:100%;
+  background:#FFFFFF;
+  color:#4B5563;           /* softer paragraph color */
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
-/* helpers */
-.h1 { @apply text-4xl md:text-6xl font-semibold leading-tight text-heading; }
-.h2 { @apply text-2xl md:text-3xl font-semibold text-heading; }
-.lead { @apply text-lg md:text-xl text-body; }
-.btn { @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition; }
-.btn-gold { @apply btn bg-gold text-black hover:opacity-90; }
-.btn-ghost { @apply btn border border-border text-heading hover:bg-black/[0.03]; }
-.card { @apply rounded-2xl bg-card border border-border shadow-soft; }
+.h1{ @apply text-4xl md:text-6xl font-semibold leading-tight text-[#0B1220]; }
+.h2{ @apply text-2xl md:text-3xl font-semibold text-[#0B1220]; }
+.lead{ @apply text-lg md:text-xl; }
+.btn{ @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition; }
+.btn-gold{ @apply btn bg-[#D4AF37] text-black hover:opacity-90; }
+.btn-ghost{ @apply btn border border-[#E5E7EB] text-[#0B1220] hover:bg-black/[0.03]; }
+.card{ @apply rounded-2xl bg-white border border-[#E5E7EB] shadow-[0_10px_30px_rgba(0,0,0,0.06)]; }
+
+/* ——— Motion (no lib required) ——— */
+@keyframes fadeUp{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)} }
+.reveal{ animation:fadeUp .6s ease both; }
+.reveal-delay-1{ animation-delay:.08s }
+.reveal-delay-2{ animation-delay:.16s }
+.reveal-delay-3{ animation-delay:.24s }
+
+/* ——— Utilities ——— */
+.gold-vignette{
+  background: radial-gradient(closest-side, #F2D98A 0%, rgba(212,175,55,.12) 35%, transparent 65%);
+}
