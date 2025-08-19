@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: #0A0A0B;
-  color: #FFFFFF;
+/* base */
+html, body {
+  min-height: 100%;
+  background: theme(colors.background);
+  color: theme(colors.body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+/* helpers */
+.h1 { @apply text-4xl md:text-6xl font-semibold leading-tight text-heading; }
+.h2 { @apply text-2xl md:text-3xl font-semibold text-heading; }
+.lead { @apply text-lg md:text-xl text-body; }
+.btn { @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition; }
+.btn-gold { @apply btn bg-gold text-black hover:opacity-90; }
+.btn-ghost { @apply btn border border-border text-heading hover:bg-black/[0.03]; }
+.card { @apply rounded-2xl bg-card border border-border shadow-soft; }
