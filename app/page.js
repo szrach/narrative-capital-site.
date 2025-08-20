@@ -20,7 +20,7 @@ export default function HomePage(){
       {/* HERO */}
       <section className="relative bg-white">
         <div className="pointer-events-none absolute top-[-140px] right-[-140px] h-[520px] w-[520px] rounded-full gold-vignette -z-10" />
-        <div className="container py-16 md:py-24">
+        <div className="container py-14 md:py-20">
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
               {/* Left: text */}
@@ -40,7 +40,7 @@ export default function HomePage(){
               </div>
 
               {/* Right: abstract card */}
-              <div className="w-full md:max-w-sm">
+              <div className="w-full md:max-w-sm md:translate-y-2">
                 <div className="card-neo p-5">
                   <div className="text-sm text-[#6B7280]">Current focus</div>
                   <ul className="mt-3 space-y-2 text-[#0B1220]">
