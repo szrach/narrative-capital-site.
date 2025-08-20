@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useRef } from "react";            // ✅ added
 import Reveal from "../components/Reveal";
 import Marquee from "../components/Marquee";
 
@@ -15,11 +17,30 @@ function Card({ title, body, delay=0 }) {
 }
 
 export default function HomePage(){
+  // ✅ tiny parallax controller
+  const glowRef = useRef(null);
+  useEffect(() => {
+    const el = glowRef.current;
+    if (!el) return;
+    const onMove = (e) => {
+      const { innerWidth:w, innerHeight:h } = window;
+      const nx = (e.clientX - w/2) / (w/2);      // -1..1
+      const ny = (e.clientY - h/2) / (h/2);      // -1..1
+      el.style.transform = `translate(${nx*20}px, ${ny*10}px)`; // subtle drift
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
   return (
     <main>
       {/* HERO */}
       <section className="relative bg-white">
-        <div className="pointer-events-none absolute top-[-140px] right-[-140px] h-[520px] w-[520px] rounded-full gold-vignette -z-10" />
+        {/* ✅ now pointer‑reactive */}
+        <div
+          ref={glowRef}
+          className="pointer-events-none absolute top-[-140px] right-[-140px] h-[520px] w-[520px] rounded-full gold-vignette -z-10 transition-transform duration-300"
+        />
         <div className="container py-14 md:py-20">
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
