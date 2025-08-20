@@ -39,9 +39,9 @@ export default function HomePage(){
         {/* ✅ now pointer‑reactive */}
         <div
           ref={glowRef}
-          className="pointer-events-none absolute top-[-140px] right-[-140px] h-[520px] w-[520px] rounded-full gold-vignette -z-10 transition-transform duration-300"
+          className="pointer-events-none absolute top-[-140px] right-[-140px] h-[520px] w-[520px] rounded-full gold-vignette -z-0 transition-transform duration-300"
         />
-        <div className="container py-14 md:py-20">
+        <div className="container py-14 md:py-20 relative z-10">
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
               {/* Left: text */}
