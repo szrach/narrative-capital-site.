@@ -88,5 +88,5 @@ html, body{
 
 /* ——— Subtle hero vignette ——— */
 .gold-vignette{
-  background: radial-gradient(closest-side, #F7E8A9 0%, rgba(212,175,55,.14) 35%, transparent 65%);
+  background: radial-gradient(closest-side, #F7E8A9 0%, rgba(212,175,55,.10) 35%, transparent 65%);
 }
