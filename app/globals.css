@@ -17,11 +17,36 @@ html, body{
 .lead{ @apply text-lg md:text-xl; }
 
 /* Buttons */
-.btn{ @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition; }
-.btn-gold{ @apply btn bg-[#D4AF37] text-black; }
-.btn-gold:hover{ transform:translateY(-2px); }
-.btn-ghost{ @apply btn border border-[#E5E7EB] text-[#0B1220]; }
-.btn-ghost:hover{ background:rgba(0,0,0,.03); }
+.btn{
+  display:inline-flex; align-items:center; gap:.55rem;
+  padding:.9rem 1.3rem;        /* slightly larger */
+  border-radius:12px;
+  font-weight:600;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background-color .18s ease,
+    border-color .18s ease;
+  will-change: transform;
+}
+.btn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212,175,55,.35);
+}
+
+.btn-gold{
+  background:#D4AF37; color:#111;
+  box-shadow: 0 6px 16px rgba(212,175,55,.28);
+}
+.btn-gold:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(212,175,55,.32); }
+.btn-gold:active{ transform: translateY(0); box-shadow: 0 6px 16px rgba(212,175,55,.28); }
+
+.btn-ghost{
+  border:1px solid #E5E7EB; color:#0B1220; background:#fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+.btn-ghost:hover{ background:rgba(0,0,0,.03); transform: translateY(-1px); }
+.btn-ghost:active{ transform: translateY(0); }
 
 /* Classic light card (not animated border) */
 .card{ @apply rounded-2xl bg-white border border-[#E5E7EB] shadow-[0_10px_30px_rgba(0,0,0,0.06)]; }
