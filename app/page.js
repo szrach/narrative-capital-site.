@@ -26,7 +26,7 @@ export default function HomePage(){
       const { innerWidth:w, innerHeight:h } = window;
       const nx = (e.clientX - w/2) / (w/2);      // -1..1
       const ny = (e.clientY - h/2) / (h/2);      // -1..1
-      el.style.transform = `translate(${nx*20}px, ${ny*10}px)`; // subtle drift
+      el.style.transform = `translate(${nx*60}px, ${ny*40}px)`; // subtle drift
     };
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
