@@ -4,11 +4,17 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import Reveal from "../components/Reveal";
 import Marquee from "../components/Marquee";
+import { ShieldIcon, SpeakerIcon, HandshakeIcon } from "../components/Icons";
 
-function Card({ title, body, delay = 0 }) {
+function Card({ title, body, delay = 0, Icon }) {
   return (
     <Reveal delay={delay}>
       <div className="card-neo p-6">
+        {Icon && (
+          <div className="icon-badge mb-3">
+            <Icon />
+          </div>
+        )}
         <h3 className="text-lg font-semibold text-[#0B1220]">{title}</h3>
         <p className="mt-2 text-[15px] text-[#4B5563]">{body}</p>
       </div>
@@ -119,15 +125,18 @@ export default function HomePage() {
           <Reveal delay={80}><p className="mt-2">Practical support that moves the needle — no promises, no fluff.</p></Reveal>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             <Card
+              Icon={ShieldIcon}
               title="Exchange readiness"
               body="Structure, compliance, and launch planning so you’re taken seriously when the timing is right."
             />
             <Card
+              Icon={SpeakerIcon}
               title="Community & distribution"
               body="Get seen by the right people early — builders, communities, and partners."
               delay={90}
             />
             <Card
+              Icon={HandshakeIcon}
               title="Partnerships"
               body="Introductions across ecosystems, infrastructure, and networks that matter."
               delay={180}
