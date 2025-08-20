@@ -96,3 +96,8 @@ html, body{
 .marquee-wrap{ background:#F6F7FB; }        /* a hair darker */
 .marquee-track{ animation:marquee 18s linear infinite; }
 .marquee-chip{ box-shadow:0 6px 16px rgba(0,0,0,.05); }
+/* fade the marquee edges so chips don't hard‑cut */
+.marquee-clip{
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
