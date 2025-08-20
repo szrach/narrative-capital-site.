@@ -23,42 +23,31 @@ function Card({ title, body, delay = 0, Icon }) {
 }
 
 export default function HomePage() {
-  // hero + glow refs
   const heroRef = useRef(null);
   const glowRef = useRef(null);
 
-  // pointer‑reactive halo (centered baseline, tracks only inside hero)
+  // Subtle, centered halo that tracks inside the hero
   useEffect(() => {
     const hero = heroRef.current;
     const glow = glowRef.current;
     if (!hero || !glow) return;
 
-    const INTENSITY = 24; // px max offset from center (tweak 16–32 to taste)
-
+    const INTENSITY = 18; // px from center (lower = subtler)
     const onMove = (e) => {
       const r = hero.getBoundingClientRect();
-      // baseline center ~ middle width, 40% height so it sits near the headline
       const cx = r.left + r.width / 2;
-      const cy = r.top + r.height * 0.4;
-
-      const nx = (e.clientX - cx) / (r.width / 2);   // -1..1
-      const ny = (e.clientY - cy) / (r.height / 2);  // -1..1
-
+      const cy = r.top + r.height * 0.40;
+      const nx = (e.clientX - cx) / (r.width / 2);
+      const ny = (e.clientY - cy) / (r.height / 2);
       const dx = Math.max(-1, Math.min(1, nx)) * INTENSITY;
       const dy = Math.max(-1, Math.min(1, ny)) * INTENSITY * 0.6;
-
       glow.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
     };
-
-    const onLeave = () => {
-      glow.style.transform = `translate(-50%, -50%)`;
-    };
+    const onLeave = () => { glow.style.transform = "translate(-50%, -50%)"; };
 
     hero.addEventListener("mousemove", onMove);
     hero.addEventListener("mouseleave", onLeave);
-    // init position
     onLeave();
-
     return () => {
       hero.removeEventListener("mousemove", onMove);
       hero.removeEventListener("mouseleave", onLeave);
@@ -69,18 +58,16 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section ref={heroRef} className="relative bg-white">
-        {/* centered, subtle gold glow that follows cursor inside hero */}
+        {/* centered, subtle gold glow */}
         <div
           ref={glowRef}
-          className="pointer-events-none absolute left-1/2 top-[40%] h-[420px] w-[420px] rounded-full gold-vignette z-0 transition-transform duration-300"
+          className="pointer-events-none absolute left-1/2 top-[40%] h-[360px] w-[360px] rounded-full gold-vignette z-0 transition-transform duration-300 will-change-transform"
           style={{ transform: "translate(-50%, -50%)" }}
         />
-
-        {/* content above the glow */}
         <div className="container py-14 md:py-20 relative z-10">
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
-              {/* Left: text */}
+              {/* Left */}
               <div className="max-w-3xl">
                 <div className="mb-6">
                   <Image src="/logo-white.png" alt="Narrative Capital" width={56} height={56} priority />
@@ -96,7 +83,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Right: abstract card */}
+              {/* Right */}
               <div className="w-full md:max-w-sm md:translate-y-2">
                 <div className="card-neo p-5">
                   <div className="text-sm text-[#6B7280]">Current focus</div>
