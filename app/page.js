@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef } from "react";            // ✅ added
+import { useEffect, useRef } from "react";
 import Reveal from "../components/Reveal";
 import Marquee from "../components/Marquee";
 
-function Card({ title, body, delay=0 }) {
+function Card({ title, body, delay = 0 }) {
   return (
     <Reveal delay={delay}>
       <div className="card-neo p-6">
@@ -16,31 +16,61 @@ function Card({ title, body, delay=0 }) {
   );
 }
 
-export default function HomePage(){
-  // ✅ tiny parallax controller
+export default function HomePage() {
+  // hero + glow refs
+  const heroRef = useRef(null);
   const glowRef = useRef(null);
+
+  // pointer‑reactive halo (centered baseline, tracks only inside hero)
   useEffect(() => {
-    const el = glowRef.current;
-    if (!el) return;
+    const hero = heroRef.current;
+    const glow = glowRef.current;
+    if (!hero || !glow) return;
+
+    const INTENSITY = 24; // px max offset from center (tweak 16–32 to taste)
+
     const onMove = (e) => {
-      const { innerWidth:w, innerHeight:h } = window;
-      const nx = (e.clientX - w/2) / (w/2);      // -1..1
-      const ny = (e.clientY - h/2) / (h/2);      // -1..1
-      el.style.transform = `translate(${nx*60}px, ${ny*40}px)`; // subtle drift
+      const r = hero.getBoundingClientRect();
+      // baseline center ~ middle width, 40% height so it sits near the headline
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height * 0.4;
+
+      const nx = (e.clientX - cx) / (r.width / 2);   // -1..1
+      const ny = (e.clientY - cy) / (r.height / 2);  // -1..1
+
+      const dx = Math.max(-1, Math.min(1, nx)) * INTENSITY;
+      const dy = Math.max(-1, Math.min(1, ny)) * INTENSITY * 0.6;
+
+      glow.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
     };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+
+    const onLeave = () => {
+      glow.style.transform = `translate(-50%, -50%)`;
+    };
+
+    hero.addEventListener("mousemove", onMove);
+    hero.addEventListener("mouseleave", onLeave);
+    // init position
+    onLeave();
+
+    return () => {
+      hero.removeEventListener("mousemove", onMove);
+      hero.removeEventListener("mouseleave", onLeave);
+    };
   }, []);
 
   return (
     <main>
       {/* HERO */}
-      <section className="relative bg-white">
-        {/* ✅ now pointer‑reactive */}
+      <section ref={heroRef} className="relative bg-white">
+        {/* centered, subtle gold glow that follows cursor inside hero */}
         <div
           ref={glowRef}
-          className="pointer-events-none absolute top-[-140px] right-[-140px] h-[520px] w-[520px] rounded-full gold-vignette -z-0 transition-transform duration-300"
+          className="pointer-events-none absolute left-1/2 top-[40%] h-[420px] w-[420px] rounded-full gold-vignette z-0 transition-transform duration-300"
+          style={{ transform: "translate(-50%, -50%)" }}
         />
+
+        {/* content above the glow */}
         <div className="container py-14 md:py-20 relative z-10">
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
