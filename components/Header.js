@@ -19,7 +19,15 @@ export default function Header(){
       <Link href="/portfolio" className="text-sm text-[#0B1220]/70 hover:text-[#0B1220]">Portfolio</Link>
       <Link href="/about" className="text-sm text-[#0B1220]/70 hover:text-[#0B1220]">About</Link>
       <Link href="/contact" className="text-sm text-[#0B1220]/70 hover:text-[#0B1220]">Contact</Link>
-      <Link href="/pitch" className="btn-gold text-sm">Pitch</Link>
+      <Link 
+        href="/pitch" 
+        className="ml-4 inline-flex items-center px-4 py-2 rounded-lg 
+             bg-[#D4AF37] text-sm font-semibold text-black 
+             shadow-md hover:shadow-lg hover:bg-[#c19c2f] 
+             transition"
+>
+  Pitch
+</Link>
     </nav>
   );
 
